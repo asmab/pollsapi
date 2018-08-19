@@ -24,6 +24,11 @@
                         </b-col>
                     </b-row>
                     <b-row>
+                        <b-col sm="2">
+                            <p> </p>
+                        </b-col>
+                    </b-row>
+                    <b-row>
                         <!-- Alert danger -->
                         <b-alert class="alert" variant="danger" dismissible :show="showDismissibleAlert" @dismissed="showDismissibleAlert=false">
                             {{ alertMessage}}

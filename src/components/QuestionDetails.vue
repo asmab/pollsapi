@@ -1,7 +1,7 @@
 <template>
     <div class="header-content">
         <div class="row">
-            <div class="col col-1"> {{index+1}} </div>
+            <div class="col col-1 index"> {{index+1}} </div>
             <div class="col col-10"> 
                 {{question.question}}<hr>
                 <div class="question-details">
@@ -43,6 +43,7 @@ $orange-color: #f39c12 ;
 hr { margin: 0px; }
 .date { float:left; }
 .choices { float: right; }
+.index { padding-right: 0px;}
 
 .question-details {
     margin-top:5px;
