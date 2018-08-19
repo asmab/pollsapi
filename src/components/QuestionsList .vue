@@ -1,11 +1,13 @@
 <template>
-    <div class="centred-wrapper">
+    <div v-if="questionsList.length > 0" class="centred-wrapper">
 
         <!-- Add new question : Modal form-->
-        <question-modal class="fixed"/>
+        <question-modal/>
 
         <div role="tablist">
+
             <b-card no-body v-for="(question,index) in questionsList" class="mb-1" v-bind:key="index">
+                
                 <b-card-header header-tag="header" class="header" role="tab">
                     <!-- QuestionDetails -->
                     <question-details  :index="index" :question="question"/>
@@ -39,8 +41,12 @@
                         </p>
                     </b-card-body>
                 </b-collapse>
+                
             </b-card>
         </div>
+    </div>
+    <div v-else>
+        <h1>Fetching data .....</h1>
     </div>
 </template>
 
