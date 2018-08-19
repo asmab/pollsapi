@@ -1,29 +1,21 @@
 <template>
   <div class="container">
-    <h1>Please fill out this poll with your inputs</h1>
-    <h3> Thanks for your time <i class="em em-smiley"></i></h3>
-    <questions-list  />
+    
+    <div class="header-fixed">
+      <h1>Please fill out this poll with your inputs</h1>
+      <h3> Thanks for your time <i class="em em-smiley"></i></h3>
+    </div>
+
+    <questions-list />
 
   </div>
-
 </template>
 
 <script>
-
 import QuestionsList  from '@/components/QuestionsList '
 
 export default {
-  components: { QuestionsList },
-  data () {
-    return {
-    }
-  },
-  created() {
-
-  },
-  methods: {
-
-  }
+  components: { QuestionsList }
 }
 </script>
 

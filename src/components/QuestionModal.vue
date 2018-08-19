@@ -52,7 +52,8 @@ export default {
             questionText: '',
             choicetags: [],
             showDismissibleAlert: false,
-            alertMessage : ''
+            alertMessage : '',
+            questionList: []
         }
     },
     methods: {
@@ -67,6 +68,10 @@ export default {
                 .then((response) => {
                     console.log(response)
                     this.hideModal()
+
+                    //TO DO : fetch List of questions again 
+                    // Using teh store(vuex) is an option and dispatch the list here 
+
                 })
                 .catch(err => {
                     console.log(err)

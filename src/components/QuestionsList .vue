@@ -2,7 +2,7 @@
     <div class="centred-wrapper">
 
         <!-- Add new question : Modal form-->
-        <question-modal />
+        <question-modal class="fixed"/>
 
         <div role="tablist">
             <b-card no-body v-for="(question,index) in questionsList" class="mb-1" v-bind:key="index">
@@ -33,8 +33,14 @@
                             </tr>
                         </table>
                     </p>
-                    <p class="card-text btn-wrapper">
+                    <p class="card-text">
                         <b-button size="50" variant="success" @click="voteOnAChoice(checkedChoice)">Submit</b-button>
+                    </p>
+                    <p>                                            
+                        <!--Alert -->
+                        <b-alert :show="showAlert" dismissible variant="danger">
+                            {{ alertMessage}}
+                        </b-alert>
                     </p>
                     </b-card-body>
                 </b-collapse>
@@ -45,50 +51,78 @@
 
 <script>
 
-
 import QuestionsService from '@/services/QuestionsService'
 
 import QuestionDetails from '@/components/QuestionDetails'
 import QuestionModal from '@/components/QuestionModal'
 
 export default {
-  components: { QuestionDetails, QuestionModal },
-  data () {
-    return {
-        questionsList : [],
-        checkedChoice: {},
-        show: false
-    }
-  },
-  created() {
+    components: { QuestionDetails, QuestionModal },
+    data () {
+        return {
+            questionsList : [],
+            checkedChoice: {},
+            show: false,
+            showAlert: false,
+            alertMessage: ''
+        }
+    },
+    created() {
       this.getQuestions()
-  },
-  methods: {
-      getQuestions(){
+    },
+    watch: {
+        checkedChoice(val){
+            if(val.url === undefined){
+                this.showAlert = true
+            } else {
+                this.showAlert = false
+            }
+        }
+    },
+    methods: {
+        getQuestions(){
             QuestionsService.getAllQuestions()
             .then((response) => this.questionsList = response.data)
             .catch(err => console.log('error :', err))
             return this.questionsList
-      },
-      dateFormatter(published_date){
+        },
+        dateFormatter(published_date){
           var convertedDate = new Date(published_date)
           return convertedDate.toLocaleDateString().toString()
-      },
-        getChoicePercentage(choices, choice){
-          //calc sum of choices
+        },
+        getChoicePercentage(choices, choice){          
             var totalVotes = 0
             var choicePercentage = 0
 
-            choices.map(choiceObj => totalVotes+=choiceObj.votes)      
+            //calc sum of choices
+            choices.map(choiceObj => totalVotes+=choiceObj.votes)
+
             choicePercentage = (totalVotes > 0) ? (choice.votes * (100/ totalVotes)).toFixed() : 0   
             return choicePercentage
         },
         voteOnAChoice(checkedChoice){
-            QuestionsService.voteOnAChoice(checkedChoice.url)
-            .then(response => this.getQuestions())
-            .catch(error => console.log(error))
-        }
+            // API call from QuestionService : to vote on a choice
+            // if the choice Url is defined
 
+            if (checkedChoice.url !== undefined ) {
+            
+                QuestionsService.voteOnAChoice(checkedChoice.url)
+                .then(response => {
+                    this.getQuestions()
+                    //dismiss the Alert
+                    this.showAlert = false
+                })
+                .catch(error => {
+                    console.log(error)
+                    this.showAlert = true
+                    this.alertMessage = "Something went wrong.Please try again !"
+                })
+            } else {
+                // if the Url is not defined we show the alert with an error message
+                this.showAlert = true
+                this.alertMessage = "Make sure to check one option before submitting . "
+            }
+        }
   }
 }
 </script>
@@ -97,7 +131,6 @@ export default {
 <style lang="scss" scoped>
 
 $orange-color: #f39c12 ;
-
 
 .header {
     height:auto;
@@ -116,16 +149,19 @@ $orange-color: #f39c12 ;
     margin-left:25%;
     margin-top: 5%;
     margin-bottom: 5%;
-
-    //border-style: dotted;
     border-radius: 3px;
 }
-.btn-wrapper {
-    float:right;
+.card-text {
+    button{
+        margin-left: 330px;
+    }    
 }
 
 table {
     text-align: left;
+    margin-right:50px;
+    margin-left:50px;
+
     td:nth-child(1){
         width: 50%;
     }
