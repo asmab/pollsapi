@@ -2,27 +2,13 @@
 
 > A Vue.js  + Webpack App  .Demo : [Polls-API](https://polls-api.herokuapp.com/#/)<br> 
 
-A single page application that lets users vote through the Polls Using [API] http://docs.pollsapi.apiary.io/
+A single page application that lets users vote through the Polls Using [API] http://docs.pollsapi.apiary.io/ .See screenshots bellow
 
 ## Features
 
 - List of questions
 - Question detail
 - Create new question
-
-## Screenshots 
-
-- Main Page : Questions List
-
-![](HomePage.png) 
-
-- Vote on a choice 
-
-![](vote.png) 
-
-- Create a new question 
-
-![](addQuestion.png) 
 
 ## Libraries used
 * VueJs
@@ -89,3 +75,17 @@ npm run start
 ```
 heroku git:remote --app pollsapi && git add . && git commit -a -m "commit message" && git push heroku master
 ```
+
+## Screenshots 
+
+- Main Page : Questions List
+
+![](HomePage.png) 
+
+- Vote on a choice 
+
+![](vote.png) 
+
+- Create a new question 
+
+![](addQuestion.png) 
