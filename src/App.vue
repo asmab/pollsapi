@@ -11,10 +11,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 
 body {
-  background-color: #f9e79f ;
+  background-color: #f9e79f;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
