@@ -25,10 +25,7 @@
                     </b-row>
                     <b-row>
                         <!-- Alert danger -->
-                        <b-alert class="alert" variant="danger"
-                        dismissible
-                        :show="showDismissibleAlert"
-                        @dismissed="showDismissibleAlert=false">
+                        <b-alert class="alert" variant="danger" dismissible :show="showDismissibleAlert" @dismissed="showDismissibleAlert=false">
                             {{ alertMessage}}
                         </b-alert>
                     </b-row>
@@ -38,15 +35,14 @@
                 </b-container>
             </div>               
             </b-modal>
-            
+
         </div>
     </div>
 </template>
 
-
 <script>
-import QuestionsService from '@/services/QuestionsService'
 
+import QuestionsService from '@/services/QuestionsService'
 const noDataErrorMsg = 'No Data to save.Please fill out the form !'
 const creationFailedErrorMsg = 'Something went wrong.Please try again !'
 
@@ -81,8 +77,7 @@ export default {
             } else {
                 this.showDismissibleAlert = true
                 this.alertMessage = noDataErrorMsg
-            }
-      
+            }      
         },
         showModal () {
             this.$refs.myModalRef.show()
@@ -100,7 +95,6 @@ export default {
         }
     }
 }
-
 </script>
 
 <style lang="scss">

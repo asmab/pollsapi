@@ -11,7 +11,7 @@
             </div>
 
             <div class="col col-1">
-                <button class="vote-btn" block href="#" v-b-toggle="'num-'+index"></button>
+                <button class="vote-btn" v-b-popover.hover="'Click me to vote !'" block href="#" v-b-toggle="'num-'+index"></button>
             </div>
         </div>
     </div>
