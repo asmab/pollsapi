@@ -1,5 +1,5 @@
 <template>
-    <div v-if="questionsList.length > 0" class="centred-wrapper">
+    <div class="centred-wrapper">
 
         <!-- Add new question : Modal form-->
         <question-modal/>
@@ -45,9 +45,9 @@
             </b-card>
         </div>
     </div>
-    <div v-else>
+    <!-- <div v-else>
         <h1>Fetching data .....</h1>
-    </div>
+    </div> -->
 </template>
 
 <script>

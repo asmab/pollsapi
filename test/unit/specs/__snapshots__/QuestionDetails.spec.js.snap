@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`QuestionDetails component QuestionDetails component looks as expected 1`] = `
+<div class="header-content">
+    <div class="row">
+        <div class="col col-1 index"> 2 </div>
+        <div class="col col-10">
+            Favourite programming language?
+            <hr>
+            <div class="question-details"><span class="date"> Published at :11/11/2014</span> <span class="choices"> 1 Choices </span></div>
+        </div>
+        <div class="col col-1">
+            <button block="" href="#" class="vote-btn"></button>
+        </div>
+    </div>
+</div>
+`;

@@ -1,12 +1,11 @@
-import Vue from 'vue'
-import { shallowMount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import QuestionList from '@/components/QuestionsList '
 
-describe('Shipping component', () => {
+describe('QuestionList component', () => {
     let wrapper
 
     beforeEach(() => {
-        wrapper = shallowMount(QuestionList)
+        wrapper = mount(QuestionList)
     })
 
     it('QuestionList component looks as expected', () => {

@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`QuestionModal component QuestionModal component looks as expected 1`] = `
+<div class="row">
+    <div class=" col add-button-wrapper">
+        <b-button class="add-btn">
+            + Create new question
+        </b-button>
+        <b-modal hide-footer="" title="Create new question">
+            <div class="d-block text-center">
+                <b-container fluid="">
+                    <b-row class="my-1">
+                        <b-col sm="2">
+                            <label for="input-small">Question:</label>
+                        </b-col>
+                        <b-col sm="10">
+                            <b-form-input id="input-small" size="sm" type="text" placeholder="Enter your question"></b-form-input>
+                        </b-col>
+                    </b-row>
+                    <b-row>
+                        <b-col sm="13">
+                            <label style="margin-left: 15px;">To add a choice use ',' or 'enter' keys to create tags</label>
+                        </b-col>
+                    </b-row>
+                    <b-row class="my-1">
+                        <b-col sm="2">
+                            <label for="input-small">Choices:</label>
+                        </b-col>
+                        <b-col sm="10">
+                            <input-tag placeholder="Enter your choices" tags="" limit="5"></input-tag>
+                        </b-col>
+                    </b-row>
+                    <b-row>
+                        <b-alert variant="danger" dismissible="" class="alert">
+
+                        </b-alert>
+                    </b-row>
+                    <b-row class="my-1">
+                        <b-btn block="" class="mt-3 submit-btn">Save</b-btn>
+                    </b-row>
+                </b-container>
+            </div>
+        </b-modal>
+    </div>
+</div>
+`;
