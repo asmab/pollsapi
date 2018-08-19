@@ -6,26 +6,10 @@
         <div role="tablist">
             <b-card no-body v-for="(question,index) in questionsList" class="mb-1" v-bind:key="index">
                 <b-card-header header-tag="header" class="header" role="tab">
-                    <div class="header-content">
-                        <div class="row">
-                            <div class="col col-1"> {{index+1}} </div>
-                            <div class="col col-10"> 
-                                {{question.question}}<hr>
-                                <div class="question-details">
-                                    <span class="date"> published at :{{dateFormatter(question.published_at)}}</span>
-                                    <span class="choices"> {{question.choices.length}} choices </span>
-                                </div>
-                            </div>
-           
-                            <div class="col col-1">
-                                <button 
-                                class="vote-btn" 
-                                block href="#" 
-                                v-b-toggle="'num-'+index"
-                                variant="primary"></button>
-                            </div>
-                        </div>
-                    </div>
+
+                    <!-- QuestionDetails -->
+                    <question-details  :index="index" :question="question"/>
+
                 </b-card-header>
 
 
@@ -38,12 +22,18 @@
                                 <td> {{choice.choice}}</td>
                                 <td>{{choice.votes}} votes</td>
                                 <td>{{getChoicePercentage(question.choices, choice)}} %</td>
-                                <td><input type="checkbox"/></td>
+                                <td>
+                                    <input 
+                                    type="radio" 
+                                    :id="choice" 
+                                    :value="choice" 
+                                    v-model="checkedChoice"/>
+                                </td>
                             </tr>
                         </table>
                     </p>
                     <p class="card-text btn-wrapper">
-                        <b-button size="50" variant="success">Submit</b-button>
+                        <b-button size="50" variant="success" @click="voteOnAChoice(checkedChoice)">Submit</b-button>
                     </p>
                     </b-card-body>
                 </b-collapse>
@@ -57,31 +47,30 @@
 
 <script>
 
-import Vue from 'vue'
-import BootstrapVue from 'bootstrap-vue'
-
-Vue.use(BootstrapVue);
-
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import QuestionsService from '@/services/QuestionsService'
 
+import QuestionDetails from '@/components/QuestionDetails'
+
 export default {
-  components: {  },
+  components: { QuestionDetails },
   data () {
     return {
         questionsList : [],
+        checkedChoice: {},
         show: false
     }
   },
   created() {
-
-      QuestionsService.getAllQuestions()
-      .then((response) => this.questionsList = response.data)
-      .catch(err => console.log('error :', err))
+      this.getQuestions()
   },
   methods: {
+      getQuestions(){
+            QuestionsService.getAllQuestions()
+            .then((response) => this.questionsList = response.data)
+            .catch(err => console.log('error :', err))
+            return this.questionsList
+      },
       dateFormatter(published_date){
           var convertedDate = new Date(published_date)
           return convertedDate.toLocaleDateString().toString()
@@ -91,15 +80,15 @@ export default {
             var totalVotes = 0
             var choicePercentage = 0
 
-            choices.map(choiceObj => totalVotes+=choiceObj.votes)
-      
-            choicePercentage = (choice.votes * (100/ totalVotes)).toFixed(2)
-
-            console.log('totalVotes ', totalVotes)
-            console.log('choicePercentage ', choicePercentage, 'choice : ',choice.choice )
-     
+            choices.map(choiceObj => totalVotes+=choiceObj.votes)      
+            choicePercentage = (totalVotes > 0) ? (choice.votes * (100/ totalVotes)).toFixed(2) : 0   
             return choicePercentage
-      }
+        },
+        voteOnAChoice(checkedChoice){
+            QuestionsService.voteOnAChoice(checkedChoice.url)
+            .then(response => this.getQuestions())
+            .catch(error => console.log(error))
+        }
 
   }
 }
@@ -107,41 +96,21 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-.container {
-  
-}
-hr { margin: 0px; }
-.date { float:left; }
-.choices { float: right; }
 
-.question-details {
-    margin-top:5px;
-}
+$orange-color: #f39c12 ;
+
 .header {
     height:auto;
     background-color: #154360;
     
     .header-content {
         text-align: left;
-         color: #f39c12 ;
+         color: $orange-color;
          font-size: 20px;
          font-weight: bold;
     }
-
-    span{
-        color: white;
-        font-size: 10px;
-        margin:0px;
-        padding:0px;
-        list-style-type: none;
-    }
 }
 
-.vote-btn{
-    width: 20px;
-    height: 20px;
-    float:right;
-}
 .centred-wrapper {
     margin-right: 20%;
     margin-left:20%;
