@@ -89,3 +89,8 @@ heroku git:remote --app pollsapi && git add . && git commit -a -m "commit messag
 - Create a new question 
 
 ![](addQuestion.png) 
+
+
+- Mobile-Friendly
+
+![](phone.jpg)
