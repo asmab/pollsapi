@@ -172,4 +172,54 @@ table {
         width: 20%;
     }
 }
+
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+  
+    .card-text {
+        button{
+            margin-left: 320px;
+        }    
+    }  
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+    .header-content{
+      font-size:12px;
+        .col-10 {
+            max-width: 73.333333%;
+        }
+    }
+
+    table{
+        margin: 0px;
+        font-size: 8px;
+    }
+
+    .choices {
+        float:left;
+    }
+
+    .centred-wrapper {
+        margin: 0px;
+    }
+
+    .card-text {
+        button{
+            margin-left: 170px;
+        }    
+    }
+
+
+}
 </style>

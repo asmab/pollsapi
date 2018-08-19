@@ -130,4 +130,20 @@ ul {
     width: 100%;
     margin-top: 15px;
 }
+
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+    .header-content{
+      font-size:12px;
+        .col-10 {
+            max-width: 73.333333%;
+        }
+    }
+
+}
 </style>
