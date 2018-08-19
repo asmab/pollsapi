@@ -1,8 +1,9 @@
 <template>
-
-  <div class="container">
-
     <div class="centred-wrapper">
+
+        <!-- Add new question : Modal form-->
+        <question-modal />
+
         <div role="tablist">
             <b-card no-body v-for="(question,index) in questionsList" class="mb-1" v-bind:key="index">
                 <b-card-header header-tag="header" class="header" role="tab">
@@ -40,9 +41,6 @@
             </b-card>
         </div>
     </div>
-   
-  </div>
-
 </template>
 
 <script>
@@ -51,9 +49,10 @@
 import QuestionsService from '@/services/QuestionsService'
 
 import QuestionDetails from '@/components/QuestionDetails'
+import QuestionModal from '@/components/QuestionModal'
 
 export default {
-  components: { QuestionDetails },
+  components: { QuestionDetails, QuestionModal },
   data () {
     return {
         questionsList : [],
@@ -81,7 +80,7 @@ export default {
             var choicePercentage = 0
 
             choices.map(choiceObj => totalVotes+=choiceObj.votes)      
-            choicePercentage = (totalVotes > 0) ? (choice.votes * (100/ totalVotes)).toFixed(2) : 0   
+            choicePercentage = (totalVotes > 0) ? (choice.votes * (100/ totalVotes)).toFixed() : 0   
             return choicePercentage
         },
         voteOnAChoice(checkedChoice){
@@ -99,6 +98,7 @@ export default {
 
 $orange-color: #f39c12 ;
 
+
 .header {
     height:auto;
     background-color: #154360;
@@ -112,8 +112,8 @@ $orange-color: #f39c12 ;
 }
 
 .centred-wrapper {
-    margin-right: 20%;
-    margin-left:20%;
+    margin-right: 25%;
+    margin-left:25%;
     margin-top: 5%;
     margin-bottom: 5%;
 

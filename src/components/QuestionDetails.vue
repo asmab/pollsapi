@@ -5,44 +5,34 @@
             <div class="col col-10"> 
                 {{question.question}}<hr>
                 <div class="question-details">
-                    <span class="date"> published at :{{dateFormatter(question.published_at)}}</span>
-                    <span class="choices"> {{question.choices.length}} choices </span>
+                    <span class="date"> Published at :{{dateFormatter(question.published_at)}}</span>
+                    <span class="choices"> {{question.choices.length}} Choices </span>
                 </div>
             </div>
 
             <div class="col col-1">
-                <button 
-                class="vote-btn" 
-                block href="#" 
-                v-b-toggle="'num-'+index">                
-                </button>
+                <button class="vote-btn" block href="#" v-b-toggle="'num-'+index"></button>
             </div>
         </div>
     </div>
-
 </template>
 
 <script>
 export default {
     props: {
         index: {
-            require: true
+            required: true
         },
         question: {
             required: true
         }
     },
-    data () {
-        return {
+    methods: {
+        dateFormatter(published_date){
+            var convertedDate = new Date(published_date)
+            return convertedDate.toLocaleDateString().toString()
         }
-    },
-      methods: {
-
-      dateFormatter(published_date){
-          var convertedDate = new Date(published_date)
-          return convertedDate.toLocaleDateString().toString()
-      },
-      }
+    }
 }
 </script>
 
@@ -81,6 +71,7 @@ hr { margin: 0px; }
     background: transparent; 
     background-image: url("../assets/vote.png");
     background-repeat: no-repeat;
+    cursor: pointer;
 }
 .btn-wrapper {
     float:right;
