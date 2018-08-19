@@ -17,15 +17,15 @@
                             <b-form-input id="input-small" v-model="questionText" size="sm" type="text" placeholder="Enter your question"></b-form-input>
                         </b-col>
                     </b-row>
+                    <b-row>
+                        <b-col sm="13">
+                            <label style="margin-left:15px">To add a choice use ',' or 'enter' keys to create tags</label>
+                        </b-col>
+                    </b-row>
                     <b-row class="my-1">
                         <b-col sm="2"><label for="input-small">Choices:</label></b-col>
                         <b-col sm="10">
                             <input-tag placeholder="Enter your choices" :tags.sync="choicetags" limit="5"></input-tag> 
-                        </b-col>
-                    </b-row>
-                    <b-row>
-                        <b-col sm="2">
-                            <p> </p>
                         </b-col>
                     </b-row>
                     <b-row>

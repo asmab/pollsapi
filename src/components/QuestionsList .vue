@@ -7,41 +7,36 @@
         <div role="tablist">
             <b-card no-body v-for="(question,index) in questionsList" class="mb-1" v-bind:key="index">
                 <b-card-header header-tag="header" class="header" role="tab">
-
                     <!-- QuestionDetails -->
                     <question-details  :index="index" :question="question"/>
-
                 </b-card-header>
-
 
                 <b-collapse :id="'num-'+index" accordion="my-accordion" role="tabpanel">
                     <b-card-body>
-                    <p class="card-text">
-                        
-                        <table>
-                            <tr v-for="choice in question.choices">
-                                <td> {{choice.choice}}</td>
-                                <td>{{choice.votes}} votes</td>
-                                <td>{{getChoicePercentage(question.choices, choice)}} %</td>
-                                <td>
-                                    <input 
-                                    type="radio" 
-                                    :id="choice" 
-                                    :value="choice" 
-                                    v-model="checkedChoice"/>
-                                </td>
-                            </tr>
-                        </table>
-                    </p>
-                    <p class="card-text">
-                        <b-button size="50" variant="success" @click="voteOnAChoice(checkedChoice)">Submit</b-button>
-                    </p>
-                    <p>                                            
-                        <!--Alert -->
-                        <b-alert :show="showAlert" dismissible variant="danger">
-                            {{ alertMessage}}
-                        </b-alert>
-                    </p>
+                        <p class="card-text">
+                            
+                            <table>
+                                <tr v-for="choice in question.choices">
+                                    <td> {{choice.choice}}</td>
+                                    <td>{{choice.votes}} votes</td>
+                                    <td>{{getChoicePercentage(question.choices, choice)}} %</td>
+                                    <td>
+                                        <input 
+                                        type="radio" 
+                                        :id="choice" 
+                                        :value="choice" 
+                                        v-model="checkedChoice"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </p>
+                        <p class="card-text">
+                            <b-button size="50" variant="success" @click="voteOnAChoice(checkedChoice)">Submit</b-button>
+                        </p>
+                        <p>                                            
+                            <!--Alert : show an error message when clicking save button before checking a choice-->
+                            <b-alert :show="showAlert" dismissible variant="danger">{{ alertMessage}}</b-alert>
+                        </p>
                     </b-card-body>
                 </b-collapse>
             </b-card>
